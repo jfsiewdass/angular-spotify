@@ -3,6 +3,7 @@ import { TrackModel } from '@core/models/tracks.model';
 import { MultimediaService } from '@shared/services/multimedia.service';
 import { ImgBrokenDirective } from '../../directives/img-broken.directive';
 import { NgIf, NgClass } from '@angular/common';
+import { inject } from '@angular/core';
 
 @Component({
     selector: 'app-card-player',
@@ -12,18 +13,18 @@ import { NgIf, NgClass } from '@angular/common';
     imports: [NgIf, NgClass, ImgBrokenDirective]
 })
 export class CardPlayerComponent implements OnInit {
-  @Input() mode: 'small' | 'big' = 'small'
-  @Input() track: TrackModel = { _id: 0, name: '', album: '', url: '', cover: '' };
+  @Input({required: true}) mode: 'small' | 'big' = 'small'
+  @Input({required: true}) track: TrackModel = { _id: 0, name: '', album: '', url: '', cover: '' };
 
-  constructor(private multimediaService: MultimediaService) { }
+  private multimediaService = inject(MultimediaService)
+  constructor() { }
 
   ngOnInit(): void {
   }
 
   sendPlay(track: TrackModel): void {
-    console.log(track);
-    
-    this.multimediaService.trackInfo$.next(track)
+     this.multimediaService.trackInfoSignal.set(track)
+    // this.multimediaService.trackInfo$.next(track)
   }
 
 }

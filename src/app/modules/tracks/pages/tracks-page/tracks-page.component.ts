@@ -3,6 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TrackModel } from '@core/models/tracks.model';
 import { Subscription } from 'rxjs';
 import { SectionGenericComponent } from '../../../../shared/components/section-generic/section-generic.component';
+import { inject } from '@angular/core';
 
 @Component({
     selector: 'app-tracks-page',
@@ -17,7 +18,7 @@ export class TracksPageComponent implements OnInit, OnDestroy {
   tracksRandom: Array<TrackModel> = []
   listObservers$: Array<Subscription> = []
 
-  constructor(private trackService: TrackService) { }
+  private trackService = inject(TrackService)
 
   ngOnInit(): void {
     this.loadDataAll() //TODO 📌📌

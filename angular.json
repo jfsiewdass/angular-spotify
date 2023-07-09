@@ -8,6 +8,9 @@
             "schematics": {
                 "@schematics/angular:application": {
                     "strict": true
+                },
+                "@schematics/angular:component": {
+                    "standalone": true
                 }
             },
             "root": "",
@@ -15,7 +18,7 @@
             "prefix": "app",
             "architect": {
                 "build": {
-                    "builder": "@angular-devkit/build-angular:browser",
+                    "builder": "@angular-devkit/build-angular:browser-esbuild",
                     "options": {
                         "outputPath": "dist/spotify",
                         "index": "src/index.html",

@@ -1,6 +1,6 @@
 import { TrackModel } from '@core/models/tracks.model';
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map, mergeMap, tap, catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -10,10 +10,7 @@ import { environment } from 'src/environments/environment';
 export class TrackService {
   private readonly URL = environment.api
 
-  constructor(private http: HttpClient) {
-
-  }
-
+  private http =  inject(HttpClient)
   /**
    * 
    * @returns Devolver todas las canciones! molonas! 🤘🤘
